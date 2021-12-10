@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html xmlns:th = "https://www.thymeleaf.org" xmlns:sec = "https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Klassenübersicht</title>
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/classOverviewStyle.css}"  />
+</head>
+
+<body>
+
+    <div id = "container">
+
+        <div id = "content">
+
+            <input type = "button" value = "SuS hinzufügen" onclick="window.location.href = 'showFormAddStudents'; return false;" class = "add-button"/>
+
+            <br><br>
+
+            <!-- Box für die Suchfunktion hinzufügen -->
+            <form action = "search" method = "GET">
+                SuS suchen: <input type = "text" name = "searchName" />
+                <input type = "submit" value = "Search" class = "add-button" />
+            </form>
+
+            <br><br>
+
+            <p>In deiner Klasse sind <span th:text = "${#lists.size(students)}"></span> Schülerinnen und Schüler:</p>
+
+            <br><br>
+
+            <table>
+
+                <tr>
+                    <th>Vorname</th>
+                    <th>Nachname</th>
+                    <th>Details</th>
+                    <th>Leistungen</th>
+                    <th>Aktion</th>
+                </tr>
+
+                <!-- über alle SuS laufen und ausgeben-->
+                <th:block th:each = "tempStudent : ${students}">
+
+                    <tr>
+                        <td th:text = "${tempStudent.getFirstName()}"></td>
+
+                        <td th:text = "${tempStudent.getLastName()}"></td>
+
+                        <!-- zeige die Details an -->
+                        <td>
+                            <form method = "GET" th:action = "@{/students/showStudentDetails}" >
+                                <input type = "hidden" name = "studentId" th:value="${tempStudent.getId()}" />
+                                <button type = "submit" name = "submit" value = "value" >Details</button>
+                            </form>
+                        </td>
+
+                        <td>
+                            <form method = "GET" th:action = "@{/students/studentPerformance}">
+                                <input type = "hidden" name = "studentId" th:value = "${tempStudent.getId()}" />
+                                <button type = "submit" name = "submit" value = "value" >Noten</button>
+
+                            </form>
+                        </td>
+
+                        <td>
+                            <!-- TODO: styling -->
+                            <!-- update und löschen - link -->
+                            <form method = "POST" th:action = "@{/students/showFormForUpdate}">
+                                <input type = "hidden" name = "studentId" th:value = "${tempStudent.getId()}"/>
+                                <button type = "submit" name = "submit" value = "value">Update</button>
+                            </form>
+
+                            <!-- https://stackoverflow.com/questions/38546100/can-i-make-http-post-request-from-thymeleaf-table-in-spring-boot-application -->
+                            <form method = "POST" th:action = "@{/students/deleteStudent}" onclick = "if(!(confirm('Möchtest du diesen Schüler / diese Schülerin wirklich löschen?'))) return false">
+                                <input type = "hidden" name = "studentId" th:value = "${tempStudent.getId()}"/>
+                                <button type = "submit" name = "submit" value = "value">Löschen</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </th:block>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

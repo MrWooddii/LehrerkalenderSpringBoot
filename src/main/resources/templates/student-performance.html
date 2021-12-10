@@ -1,0 +1,86 @@
+<html xmlns:th = "https://www.thymeleaf.org" xmlns:sec = "https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/classOverviewStyle.css}"  />
+
+    <title>Notenübersicht</title>
+
+</head>
+
+<body>
+
+<p th:text = "'Übersicht über die Noten von ' + ${student.firstName} + ' ' + ${student.lastName}"></p>
+
+<div id = "container">
+
+    <div id = "content">
+
+        <input type = "button" value = "Note hinzufügen"
+               onclick = "window.location.href = 'saveGrade'; return false;"
+               class = "add-button"
+        />
+
+        <br><br>
+
+        <table>
+
+            <tr>
+                <th>Datum</th>
+                <th>Fach</th>
+                <th>Titel</th>
+                <th>Note</th>
+                <th>Art</th>
+                <th>Anmerkungen</th>
+                <th>Aktion</th>
+            </tr>
+
+
+            <!-- über alle Noten eines SuS laufen und ausgeben -->
+            <th:block th:each = "grade : ${grades}">
+
+                <tr>
+
+                    <!-- um LocalDate zu formatieren, muss "temporals" statt "dates" genommen werden -->
+                <td th:text = "${#temporals.format(grade.date, 'dd.MM.yyyy')}"></td>
+                <td th:text = "${grade.subject}"></td>
+                <td th:text = "${grade.titel}"></td>
+                <td th:text = "${grade.performance}"></td>
+                <td th:switch = "${grade.written}">
+                    <p th:case = "true">schriftlich</p>
+                    <p th:case = "false">mündlich</p>
+                </td>
+                    <!-- TODO: styling -->
+                <td th:text = "${grade.notes}"></td>
+                    <!-- update und löschen - link -->
+                    <td>
+                        <form method = "POST" th:action = "@{/students/updateGrade}">
+                            <input type = "hidden" name = "gradeId" th:value = "${grade.id}"/>
+                            <input type = "hidden" name = "studentId" th:value = "${student.id}"/>
+                            <button type = "submit" name = "submit" value = "value">Update</button>
+                        </form>
+
+                        <!-- https://stackoverflow.com/questions/38546100/can-i-make-http-post-request-from-thymeleaf-table-in-spring-boot-application -->
+                        <form method = "GET" th:action = "@{/students/deleteGrade}" onclick = "if(!(confirm('Möchtest du diese Note wirklich löschen?'))) return false">
+                            <input type = "hidden" name = "gradeId" th:value = "${grade.id}"/>
+                            <input type = "hidden" name = "studentId" th:value = "${student.id}"/>
+                            <button type = "submit" name = "submit" value = "value">Löschen</button>
+                        </form>
+                        </td>
+
+                </tr>
+
+            </th:block>
+
+    <p>
+        <a th:href = "@{/students/class-overview}">Zurück zur Klassenübersicht</a>
+    </p>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

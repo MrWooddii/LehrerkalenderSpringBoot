@@ -1,0 +1,87 @@
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>SuS hinzufügen</title>
+</head>
+
+<body>
+
+<div id = "container">
+    <h3>SuS hinzufügen</h3>
+
+    <!-- Send to Spring MVC mapping - modelAttribute = "student" entspricht im Controller dem angegebenen Namen in der "model.addAttribute"-Methode -->
+    <form th:action = "@{/students/saveOrUpdate}" th:object = "${student}" method = "POST">
+
+        <table>
+            <tbody>
+
+            <input type = "hidden" th:field = "*{id}"/>
+            <tr>
+                <td><label>Vorname:<sup>*</sup></label></td>
+                <td><input type = "text" th:field = "*{firstName}"/></td> <!-- ${student.fistName} wäre auch möglich -->
+                <td th:if = "${#fields.hasErrors('firstName')}" th:errors = "*{firstName}"></td>
+            </tr>
+
+            <tr>
+                <td><label>Nachname:<sup>*</sup></label></td>
+                <td><input type = "text" th:field = "*{lastName}"/></td>
+                <td th:if = "${#fields.hasErrors('lastName')}" th:errors = "*{lastName}"></td>
+            </tr>
+
+            <tr>
+                <td><label>E-Mail:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.email}"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Notfall-Telefonnummer:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.emergencyNumber}"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Religion:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.religion}"/></td>
+
+            </tr>
+
+            <tr>
+                <td><label>Postleitzahl:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.address.postalCode}"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Stadt:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.address.city}"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Straße:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.address.roadName}"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Hausnummer:</label></td>
+                <td><input type = "text" th:field = "*{studentDetail.address.houseNumber}"/></td>
+            </tr>
+
+            <tr>
+                <td><label></label></td>
+                <td><input type = "submit" value = "Speichern" class = "save"/></td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+    </form>
+
+
+    <p>
+        <a th:href = "@{/students/class-overview}">Zurück zur Klassenübersicht</a>
+    </p>
+
+</div>
+
+</body>
+
+</html>
