@@ -1,4 +1,4 @@
-package com.lehrerkalender.lehrerkalender.service;
+package com.lehrerkalender.lehrerkalender.dao;
 
 import com.lehrerkalender.lehrerkalender.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,12 +1,12 @@
 package com.lehrerkalender.lehrerkalender.service;
 
+import com.lehrerkalender.lehrerkalender.dao.GradeRepository;
+import com.lehrerkalender.lehrerkalender.dao.StudentRepository;
 import com.lehrerkalender.lehrerkalender.entity.Grade;
 import com.lehrerkalender.lehrerkalender.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
