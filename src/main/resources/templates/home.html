@@ -1,14 +1,15 @@
-<!DOCTYPE html>
 <html xmlns:th = "https://www.thymeleaf.org" xmlns:sec = "https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Homepage Lehrerkalender</title>
-    <!-- "@"-Symbol referenziert den context path der app -->
-    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/loginStyle.css}" />
+    <title>Home</title>
 </head>
+
 <body>
-    <p th:text = "'Willkommen zum ' + ${appName}" class = "welcomeText"></p>
-    <p>Click <a th:href = "@{/landing-page}">here</a> to see a greeting.</p>
-    <p ></p>
+<h1>Herzlich Willkommen zu deinem Lehrerkalender!</h1>
+
+<a th:href = "@{/students/class-overview}">Klassenübersicht</a>
+
 </body>
+
+
 </html>
