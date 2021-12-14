@@ -18,7 +18,6 @@
 
         <input type = "hidden" th:field = "*{id}"/>
 
-        <!-- TODO: Datepicker -->
         <label>Datum: </label>
         <input type = "date" th:field = "*{date}"></input>
         <p th:if = "${#fields.hasErrors('date')}" th:errors = "*{date}" th:class = "error"></p>
