@@ -12,32 +12,36 @@ import org.springframework.security.core.userdetails.User;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //Spring sec doc: https://docs.spring.io/spring-security/reference/servlet/index.html
+    //Anleitung Security: https://labs.micromata.de/category/best-practices/tutorial-spring-security/
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         User.UserBuilder users = User.withDefaultPasswordEncoder();
 
         auth.inMemoryAuthentication()
-                .withUser(users.username("john").password("test123").roles("EMPLOYEE"))
-                .withUser(users.username("mary").password("test123").roles("MANAGER"))
+                .withUser(users.username("john").password("test123").roles("TEACHER"))
+                .withUser(users.username("mary").password("test123").roles("TEACHER"))
                 .withUser(users.username("susan").password("test123").roles("ADMIN"));
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/").permitAll();
-
-        /*
-        http
-        .formLogin().loginPage("/login")
-                .loginProcessingUrl("/authenticateTheUser")
-                .failureUrl("/login-error")
+        http.authorizeRequests()
+                .antMatchers("/students/**").hasRole("TEACHER")
+                .antMatchers("/user/**").hasRole("TEACHER")
+                .antMatchers("/resources/**").permitAll()
                 .and()
-                .logout()
-                .logoutSuccessUrl("/home")
+                .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/authenticateTheUser")
+                    .defaultSuccessUrl("/user/home")
+                    .failureUrl("/login-error")
+                    .permitAll()
+                .and()
+                .logout().permitAll()
+                    .logoutUrl("/logout")
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
-
-         */
-
     }
 }
