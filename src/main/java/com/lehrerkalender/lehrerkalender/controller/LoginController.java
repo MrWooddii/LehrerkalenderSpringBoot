@@ -27,12 +27,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String loggedOut(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-        //Authentication des zuvor eingeloggten Users löschen
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        session.removeAttribute("user");
+
         //Auf der Login-Seite wird dadurch die "Logout-Message" eingeblendet
         model.addAttribute("loggedOut", true);
         return "login-page";
