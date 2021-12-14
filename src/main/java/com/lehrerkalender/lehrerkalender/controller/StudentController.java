@@ -2,7 +2,6 @@ package com.lehrerkalender.lehrerkalender.controller;
 
 import com.lehrerkalender.lehrerkalender.entity.Grade;
 import com.lehrerkalender.lehrerkalender.entity.Student;
-import com.lehrerkalender.lehrerkalender.service.StudentRepository;
 import com.lehrerkalender.lehrerkalender.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -76,7 +74,7 @@ public class StudentController {
         return redirectToClassOverviewLink;
     }
 
-    @PostMapping("/showFormForUpdate")
+    @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("studentId") Long id, Model model) {
 
         Student student = studentService.getStudentById(id);
@@ -85,7 +83,7 @@ public class StudentController {
         return "students-form";
     }
 
-    @PostMapping("/deleteStudent")
+    @GetMapping("/deleteStudent")
     public String deleteStudent(@RequestParam("studentId") Long id) {
 
         if(id == null) {
@@ -139,25 +137,28 @@ public class StudentController {
             return "grade-add-form";
         }
 
-        session.removeAttribute("studentToGrade");
-
         grade.setStudent(student);
-
         studentService.saveGrade(grade);
-        return redirectToClassOverviewLink;
+        List<Grade> grades = studentService.getGradesByStudent(student.getId());
+        model.addAttribute("grades", grades);
+        return "student-performance";
+        //return redirectToClassOverviewLink;
     }
 
-    @PostMapping("/updateGrade")
-    public String updateGrade(@RequestParam("gradeId") Long gradeId, @RequestParam("studentId") Long studentId, Model model){
+    @GetMapping("/updateGrade")
+    public String updateGrade(@RequestParam("gradeId") Long gradeId, Model model){
         Grade gradeToUpdate = studentService.getGradeById(gradeId);
-        Student student = studentService.getStudentById(studentId);
+        Student student = studentService.getStudentById(gradeToUpdate.getStudent().getId());
+
         model.addAttribute("student", student);
         model.addAttribute("grade", gradeToUpdate);
         return "grade-add-form";
     }
 
     @GetMapping("/deleteGrade")
-    public String deleteGrade(@RequestParam("gradeId") Long gradeId, @RequestParam("studentId") Long studentId, Model model) {
+    public String deleteGrade(@RequestParam("gradeId") Long gradeId, Model model) {
+        Grade gradeToDelete = studentService.getGradeById(gradeId);
+        Long studentId = gradeToDelete.getStudent().getId();
         Student student = studentService.getStudentById(studentId);
 
         studentService.deleteGrade(gradeId);
@@ -165,7 +166,6 @@ public class StudentController {
         List<Grade> grades = studentService.getGradesByStudent(studentId);
         model.addAttribute("student", student);
         model.addAttribute("grades", grades);
-
 
         return "student-performance";
     }
