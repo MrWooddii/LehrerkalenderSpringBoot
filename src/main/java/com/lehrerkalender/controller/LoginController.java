@@ -1,4 +1,4 @@
-package com.lehrerkalender.lehrerkalender.controller;
+package com.lehrerkalender.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,8 +27,6 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String loggedOut(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-        //User aus der Session entfernen
-        session.removeAttribute("user");
         //Authentication des zuvor eingeloggten Users löschen
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth != null) {

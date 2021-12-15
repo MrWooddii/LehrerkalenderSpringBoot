@@ -1,4 +1,4 @@
-package com.lehrerkalender.lehrerkalender.controller;
+package com.lehrerkalender.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

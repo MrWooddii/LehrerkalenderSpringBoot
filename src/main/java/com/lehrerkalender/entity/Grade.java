@@ -1,4 +1,4 @@
-package com.lehrerkalender.lehrerkalender.entity;
+package com.lehrerkalender.entity;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Range;

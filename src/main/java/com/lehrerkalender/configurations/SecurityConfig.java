@@ -1,17 +1,16 @@
-package com.lehrerkalender.lehrerkalender.configurations;
+package com.lehrerkalender.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -20,18 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Spring sec doc: https://docs.spring.io/spring-security/reference/servlet/index.html
     //Anleitung Security: https://labs.micromata.de/category/best-practices/tutorial-spring-security/
 
-    private final PasswordEncoder passwordEncoder;
-
     //UserDetailsService wird genutzt, um username, password und GrantedAuthorities für User zu erhalten
     @Autowired
     UserDetailsService userDetailsService;
-
-
-    @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -52,14 +42,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/students/**").hasRole("TEACHER")
-                .antMatchers("/user/**").hasRole("TEACHER")
+                .antMatchers("/students/**").hasRole("USER")
+                .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/resources/**").permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/authenticateTheUser")
-                    .defaultSuccessUrl("/user/home")
+                    //.defaultSuccessUrl("/user/home")
+                    .defaultSuccessUrl("/students/class-overview")
                     .failureUrl("/login-error")
                     .permitAll()
                 .and()
@@ -67,5 +58,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutUrl("/logout")
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        //return new BCryptPasswordEncoder(10);
+        return NoOpPasswordEncoder.getInstance();
     }
 }

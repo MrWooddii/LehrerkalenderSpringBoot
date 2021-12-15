@@ -1,10 +1,9 @@
-package com.lehrerkalender.lehrerkalender.entity;
+package com.lehrerkalender.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 
