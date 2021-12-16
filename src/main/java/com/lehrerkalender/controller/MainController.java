@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
     @Value("${spring.application.name}")
-    String appName;
+    private String appName;
 
     @GetMapping("/landing-page")
     public String showLandingPage(Model model) {

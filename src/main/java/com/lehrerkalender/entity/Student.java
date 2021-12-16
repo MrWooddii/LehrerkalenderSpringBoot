@@ -37,9 +37,6 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     List<Grade> gradeList = new ArrayList<>();
 
-    //TODO
-    //private Teacher teacher;
-
     public Student(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

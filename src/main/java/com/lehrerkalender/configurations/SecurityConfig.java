@@ -26,31 +26,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.userDetailsService(userDetailsService);
-
-                /*
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-
-        auth.inMemoryAuthentication()
-                .withUser(users.username("john").password("test123").roles("TEACHER"))
-                .withUser(users.username("mary").password("test123").roles("TEACHER"))
-                .withUser(users.username("susan").password("test123").roles("ADMIN"));
-
-                 */
+        auth.userDetailsService(userDetailsService).passwordEncoder(getPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/students/**").hasRole("USER")
+                .antMatchers("/user/register").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/resources/**").permitAll()
+                .antMatchers("/register").permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/login")
                     .loginProcessingUrl("/authenticateTheUser")
-                    //.defaultSuccessUrl("/user/home")
-                    .defaultSuccessUrl("/students/class-overview")
+                    .defaultSuccessUrl("/user/home")
                     .failureUrl("/login-error")
                     .permitAll()
                 .and()
@@ -62,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        //return new BCryptPasswordEncoder(10);
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

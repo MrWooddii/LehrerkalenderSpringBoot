@@ -1,0 +1,35 @@
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Registrierung</title>
+</head>
+
+<body>
+
+<form th:action = "@{/user/register}" th:object = "${user}" th:method="POST">
+
+    <input type = "text" th:field = "*{username}" placeholder = "Benutzername">
+    <div th:if = "${#fields.hasErrors('username')}" th:errors = "*{username}"></div>
+    <br><br>
+    <input type = "password" th:field = "*{password}" placeholder = "Passwort">
+    <div th:if = "${#fields.hasErrors('password')}" th:errors = "*{password}"></div>
+    <br><br>
+    <input type = "text" th:field = "*{email}" placeholder = "E-Mail">
+    <div th:if = "${#fields.hasErrors('email')}" th:errors = "*{email}"></div>
+    <br><br>
+    <input type = "text" th:field = "*{firstName}" placeholder = "Vorname">
+    <br><br>
+    <input type = "text" th:field = "*{lastName}" placeholder = "Nachname">
+    <br><br>
+    <div th:if = "${usernameTaken}">Der Benutzername ist bereits vergeben.</div>
+    <div th:if = "${emailTaken}">Die E-Mail wird bereits genutzt.</div>
+
+    <br>
+
+    <input type = "submit" value = "Registrieren"/>
+
+</form>
+
+</body>
+
+</html>
