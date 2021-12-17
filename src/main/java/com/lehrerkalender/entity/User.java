@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -41,6 +42,7 @@ public class User {
 
     @Column(name = "email", unique = true)
     @NotBlank(message = "Bitte gib eine E-Mail an.")
+    @Email(message = "Bitte gib eine gültige E-Mail an")
     private String email;
 
 }

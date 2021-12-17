@@ -6,7 +6,7 @@
 
 <body>
 
-<form th:action = "@{/user/register}" th:object = "${user}" th:method="POST">
+<form th:action = "@{/account/register}" th:object = "${user}" th:method="POST">
 
     <input type = "text" th:field = "*{username}" placeholder = "Benutzername">
     <div th:if = "${#fields.hasErrors('username')}" th:errors = "*{username}"></div>
