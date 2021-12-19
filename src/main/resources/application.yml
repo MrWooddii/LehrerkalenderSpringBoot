@@ -25,5 +25,16 @@ spring:
   application:
     name: Lehrerkalender
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: wooddiidev@gmail.com
+    password: advmctrsoxezovcy
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 

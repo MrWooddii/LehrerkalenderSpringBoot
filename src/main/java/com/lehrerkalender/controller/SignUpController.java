@@ -1,6 +1,7 @@
 package com.lehrerkalender.controller;
 
 import com.lehrerkalender.entity.User;
+import com.lehrerkalender.service.EmailService;
 import com.lehrerkalender.service.SecurityService;
 import com.lehrerkalender.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class SignUpController {
     @Autowired
     private SecurityService securityService;
 
+    @Autowired
+    private EmailService emailService;
+
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         User newUser = new User();
@@ -46,13 +50,16 @@ public class SignUpController {
             if(!uniqueEmail) {
                 model.addAttribute("emailTaken", true);
             }
-            System.out.println(">>>>> Error");
             return "register-form";
         }
 
         String rawPassword = user.getPassword();
 
         userService.registerUser(user);
+
+        //Einfache Willkommensmail an die angegebene Mail-Adresse senden
+        //TODO: Mail Verifikation
+        emailService.sendSimpleMessage(user.getEmail(), "Herzlich Willkommen zu deinem Lehrerkalender!", "Vielen Dank für deine Registrierung " + user.getFirstName() + "!");
 
         try {
             securityService.autoLogin(user.getUsername(), rawPassword);
