@@ -5,9 +5,9 @@ server:
 
 spring:
   datasource:
-    password: admin
+    password: 
     url: jdbc:mysql://localhost:3306/lehrerkalender_springboot?useSSL=false
-    username: root
+    username: 
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
