@@ -1,0 +1,67 @@
+<html xmlns:th = "https://www.thymeleaf.org" xmlns:sec = "https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/classOverviewStyle.css}"  />
+
+    <title>Weitere Informationen</title>
+
+</head>
+
+<body>
+
+<p th:text = "'Weitere Informationen zu ' + ${student.firstName} + ' ' + ${student.lastName}"></p>
+
+<div id = "container">
+
+    <div id = "content">
+
+
+        <br><br>
+
+
+        <table>
+
+            <tr>
+                <th>Email</th>
+                <td th:text = "${student.studentDetail.email}"></td>
+            </tr>
+
+            <tr>
+                <th>Notfallnummer</th>
+                <td th:text = "${student.studentDetail.emergencyNumber}"></td>
+            </tr>
+
+            <tr>
+                <th>Religion</th>
+                <td th:text = "${student.studentDetail.religion}"></td>
+            </tr>
+
+            <tr>
+                <th>Postleitzahl</th>
+                <td th:text = "${student.studentDetail.address.postalCode}"></td>
+            </tr>
+
+            <tr>
+                <th>Stadt</th>
+                <td th:text = "${student.studentDetail.address.city}"></td>
+            </tr>
+
+            <tr>
+                <th>Straße</th>
+                <td th:text = "${student.studentDetail.address.roadName} + ' ' + ${student.studentDetail.address.houseNumber}"></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <p>
+        <a th:href = "@{/students/class-overview}">Zurück zur Klassenübersicht</a>
+    </p>
+
+</div>
+
+
+</body>
+
+</html>

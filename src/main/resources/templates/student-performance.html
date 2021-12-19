@@ -1,0 +1,114 @@
+<html xmlns:th = "https://www.thymeleaf.org" xmlns:sec = "https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/navbar.css}"/>
+
+    <title>Notenübersicht</title>
+
+</head>
+
+<body>
+
+    <ul>
+        <li>
+            <a th:href = "@{/user/home}">Home</a>
+        </li>
+
+        <!-- TODO: Module einbauen -->
+        <li>
+            <a th:href = "@{/user/home}">Module</a>
+        </li>
+
+        <li class = "topnav-right">
+            <a th:href = "@{/logout}">Logout</a>
+        </li>
+    </ul>
+
+<h2 th:text = "'Übersicht über die Noten von ' + ${student.firstName} + ' ' + ${student.lastName}"></h2>
+
+<div id = "container">
+
+        <input type = "button" value = "Note hinzufügen"
+               onclick = "window.location.href = 'saveGrade'; return false;"
+               class = "btn btn-success"
+        />
+
+        <br><br>
+
+        <table class = "table table-bordered table-stiped">
+
+            <tr class = "table-success">
+                <th>Datum</th>
+                <th>Fach</th>
+                <th>Titel</th>
+                <th>Note</th>
+                <th>Art</th>
+                <th>Anmerkungen</th>
+                <th>Aktion</th>
+            </tr>
+
+
+            <!-- über alle Noten eines SuS laufen und ausgeben -->
+            <th:block th:each = "grade : ${grades}">
+
+                <tr class = "table-secondary">
+
+                    <!-- um LocalDate zu formatieren, muss "temporals" statt "dates" genommen werden -->
+                <td th:text = "${#temporals.format(grade.date, 'dd.MM.yyyy')}"></td>
+                <td th:text = "${grade.subject}"></td>
+                <td th:text = "${grade.titel}"></td>
+                <td th:text = "${grade.performance}"></td>
+                <td th:switch = "${grade.written}">
+                    <p th:case = "true">schriftlich</p>
+                    <p th:case = "false">mündlich</p>
+                </td>
+                    <!-- TODO: styling -->
+                <td th:text = "${grade.notes}"></td>
+                    <!-- update und löschen - link -->
+                    <td>
+                        <a th:href = "@{/students/updateGrade(gradeId=${grade.id})}" class = "btn btn-primary" role = "button">
+                            Update</a>
+
+
+                        <a th:href = "@{/students/deleteGrade(gradeId = ${grade.id})}" class = "btn btn-danger" role = "button" onclick = "if(!(confirm('Möchtest du diese Note wirklich löschen?'))) return false">
+                            Löschen
+                        </a>
+
+                        <!--
+                        <form method = "POST" th:action = "@{/students/updateGrade}">
+                            <input type = "hidden" name = "gradeId" th:value = "${grade.id}"/>
+                            <input type = "hidden" name = "studentId" th:value = "${student.id}"/>
+                            <button type = "submit" name = "submit" value = "value">Update</button>
+                        </form> -->
+
+                        <!-- https://stackoverflow.com/questions/38546100/can-i-make-http-post-request-from-thymeleaf-table-in-spring-boot-application -->
+                        <!--
+                        <form method = "GET" th:action = "@{/students/deleteGrade}" onclick = "if(!(confirm('Möchtest du diese Note wirklich löschen?'))) return false">
+                            <input type = "hidden" name = "gradeId" th:value = "${grade.id}"/>
+                            <input type = "hidden" name = "studentId" th:value = "${student.id}"/>
+                            <button type = "submit" name = "submit" value = "value">Löschen</button>
+                        </form> -->
+                        </td>
+
+                </tr>
+
+            </th:block>
+
+    <p>
+        <a th:href = "@{/students/class-overview}">Zurück zur Klassenübersicht</a>
+    </p>
+
+        </table>
+
+</div>
+
+</body>
+
+</html>

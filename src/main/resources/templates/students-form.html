@@ -1,0 +1,78 @@
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <!-- wird benötigt, damit im placeholder * hochgesetzt werden kann -->
+    <meta charset = "utf-8">
+    <title>SuS hinzufügen</title>
+</head>
+
+<body>
+
+<div id = "container">
+    <h3>SuS hinzufügen</h3>
+
+    <!-- Send to Spring MVC mapping - th:object = "student" entspricht im Controller dem angegebenen Namen in der "model.addAttribute"-Methode -->
+    <form th:action = "@{/students/saveOrUpdate}" th:object = "${student}" method = "POST">
+
+        <table>
+            <tbody>
+
+            <input type = "hidden" th:field = "*{id}"/>
+            <tr>
+                <td><input type = "text" th:field = "*{firstName}" placeholder = "Vorname&#42"/></td> <!-- ${student.firstName} wäre auch möglich -->
+                <td th:if = "${#fields.hasErrors('firstName')}" th:errors = "*{firstName}"></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{lastName}" placeholder = "Nachname&#42"/></td>
+                <td th:if = "${#fields.hasErrors('lastName')}" th:errors = "*{lastName}"></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.email}" placeholder = "E-Mail"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.emergencyNumber}" placeholder = "Notfall-Telefonnummer"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.religion}" placeholder = "Religion"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.address.postalCode}" placeholder = "Postleitzahl"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.address.city}" placeholder = "Stadt"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.address.roadName}" placeholder = "Straße"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "text" th:field = "*{studentDetail.address.houseNumber}" placeholder = "Hausnummer"/></td>
+            </tr>
+
+            <tr>
+                <td><input type = "submit" value = "Speichern" class = "save"/></td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+    </form>
+
+
+    <p>
+        <a th:href = "@{/students/class-overview}">Zurück zur Klassenübersicht</a>
+    </p>
+
+</div>
+
+</body>
+
+</html>
