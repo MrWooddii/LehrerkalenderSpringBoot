@@ -22,7 +22,6 @@ public class UserService {
         user.setActive(true);
         user.setRoles("ROLE_USER");
         userRepository.save(user);
-
     }
 
     public String encryptPassword(String password) {

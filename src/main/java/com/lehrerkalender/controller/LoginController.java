@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String loggedOut(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public String loggedOut(Model model, HttpServletRequest request, HttpServletResponse response) {
         //Authentication des zuvor eingeloggten Users löschen
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth != null) {

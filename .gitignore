@@ -6,6 +6,7 @@ target/
 
 ##Sensistive Data##
 src/main/resources/application.yml
+*.yml
 
 ### STS ###
 .apt_generated

@@ -1,5 +1,6 @@
 package com.lehrerkalender.entity;
 
+import com.lehrerkalender.user.CustomUserDetails;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,7 +36,10 @@ public class Student {
     private StudentDetail studentDetail;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    List<Grade> gradeList = new ArrayList<>();
+    private List<Grade> gradeList = new ArrayList<>();
+
+    @Column (name = "user_id")
+    private Long userId;
 
     public Student(String firstName, String lastName) {
         this.firstName = firstName;

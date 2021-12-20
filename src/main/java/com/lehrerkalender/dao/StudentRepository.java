@@ -12,12 +12,8 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
 
-    @Query("SELECT s FROM Student s WHERE lower(s.firstName) LIKE %:searchName% or lower(s.lastName) LIKE %:searchName%")
-    public List<Student> findStudentsByName(@Param("searchName") String name);
+    @Query("SELECT s FROM Student s WHERE lower(s.firstName) LIKE %:searchName% or lower(s.lastName) LIKE %:searchName% AND s.userId = :userId")
+    public List<Student> findStudentsByNameAndUserId(@Param("searchName") String name, @Param("userId") Long userId);
 
-    /*
-    @Query("SELECT s FROM Student s WHERE s.id = :studentId")
-    public Student getStudentById(@Param("studentId") Long id);
-     */
-
+    public List<Student> findStudentsByUserId(Long userId);
 }

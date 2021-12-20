@@ -4,7 +4,10 @@ import com.lehrerkalender.dao.GradeRepository;
 import com.lehrerkalender.dao.StudentRepository;
 import com.lehrerkalender.entity.Grade;
 import com.lehrerkalender.entity.Student;
+import com.lehrerkalender.entity.User;
+import com.lehrerkalender.user.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +26,8 @@ public class StudentService {
         this.gradeRepository = gradeRepository;
     }
 
-    public List<Student> getStudents() {
-        return studentRepository.findAll();
+    public List<Student> getStudents(Long userId) {
+        return studentRepository.findStudentsByUserId(userId);
     }
 
     public Student getStudentById(Long id) {
@@ -41,14 +44,14 @@ public class StudentService {
 
     //sucht nach den SuS nach dem eingegebenen Namen in der Suchfunktion
     //TODO: Tabelle dynamisch mit JS filtern lassen
-    public List<Student> getStudentsByName(String name) {
-        List<Student> students = studentRepository.findStudentsByName(name);
+    public List<Student> getStudentsByName(String name, Long userId) {
+        List<Student> students = studentRepository.findStudentsByNameAndUserId(name, userId);
         return students;
     }
 
-    public void saveOrUpdateStudent(Student student) {
+    public void saveOrUpdateStudent(@AuthenticationPrincipal CustomUserDetails user, Student student) {
+        student.setUserId(user.getId());
         studentRepository.save(student);
-        System.out.println("Saved student inside Service: " + student);
     }
 
     public void deleteStudent(Long id) {

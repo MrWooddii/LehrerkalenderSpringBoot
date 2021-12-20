@@ -2,6 +2,8 @@ package com.lehrerkalender.user;
 
 import com.lehrerkalender.entity.User;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,21 +13,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CustomUserDetails implements UserDetails {
+@Getter
+@Setter
+public class CustomUserDetails extends User implements UserDetails {
 
     //https://www.youtube.com/watch?v=TNt3GHuayXs
 
-    private String username;
-    private String password;
-    private boolean active;
+    private User user;
+    private Long id;
     private List<GrantedAuthority> authorities;
 
     public CustomUserDetails() { }
 
     public CustomUserDetails (User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.active = user.isActive();
+        this.user = user;
+        this.id = user.getId();
         this.authorities = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
@@ -38,12 +40,12 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return this.user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return this.user.getUsername();
     }
 
     @Override
@@ -63,6 +65,6 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return this.user.isActive();
     }
 }

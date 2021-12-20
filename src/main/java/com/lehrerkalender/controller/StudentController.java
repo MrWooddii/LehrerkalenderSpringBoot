@@ -3,7 +3,9 @@ package com.lehrerkalender.controller;
 import com.lehrerkalender.entity.Grade;
 import com.lehrerkalender.entity.Student;
 import com.lehrerkalender.service.StudentService;
+import com.lehrerkalender.user.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,11 +26,11 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/class-overview")
-    public String showClassOverview(Model model, HttpSession session) {
+    public String showClassOverview(Model model, HttpSession session, @AuthenticationPrincipal CustomUserDetails user) {
 
         session.removeAttribute("studentToGrade");
 
-        List<Student> students = studentService.getStudents();
+        List<Student> students = studentService.getStudents(user.getId());
 
         model.addAttribute("students", students);
 
@@ -36,11 +38,11 @@ public class StudentController {
     }
 
     @GetMapping("/search")
-    public String searchStudent(@RequestParam("searchName") String searchName, Model model) {
+    public String searchStudent(@RequestParam("searchName") String searchName, @AuthenticationPrincipal CustomUserDetails user, Model model) {
 
         System.out.println("searchName: " + searchName);
 
-        List<Student> students = studentService.getStudentsByName(searchName);
+        List<Student> students = studentService.getStudentsByName(searchName, user.getId());
 
         //TODO: Fehlermeldung ausgeben
         if (students.isEmpty()) {
@@ -63,13 +65,13 @@ public class StudentController {
 
     @PostMapping("/saveOrUpdate")
     @Transactional
-    public String saveOrUpdateStudent(@Valid @ModelAttribute("student") Student student, BindingResult result) {
+    public String saveOrUpdateStudent(@Valid @ModelAttribute("student") Student student, BindingResult result, @AuthenticationPrincipal CustomUserDetails user) {
 
         if(result.hasErrors()) {
             return "students-form";
         }
 
-        studentService.saveOrUpdateStudent(student);
+        studentService.saveOrUpdateStudent(user, student);
 
         return redirectToClassOverviewLink;
     }
