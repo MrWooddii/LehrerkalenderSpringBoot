@@ -2,14 +2,18 @@ package com.lehrerkalender.service;
 
 import com.lehrerkalender.dao.GradeRepository;
 import com.lehrerkalender.dao.StudentRepository;
+import com.lehrerkalender.entity.Student;
+import com.lehrerkalender.user.CustomUserDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
-
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.verify;
 
 //Ersetzt Autoclosable
 @ExtendWith(MockitoExtension.class)
@@ -49,8 +53,21 @@ class StudentServiceTest {
     }
 
     @Test
-    @Disabled
-    void saveOrUpdateStudent() {
+    void canSaveOrUpdateStudent() {
+        Student student = new Student("firstName", "lastName");
+        student.setUserId(10L);
+        CustomUserDetails user = new CustomUserDetails();
+        user.setId(10L);
+
+        underTest.saveOrUpdateStudent(user, student);
+
+        ArgumentCaptor<Student> studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
+
+        verify(studentRepository).save(studentArgumentCaptor.capture());
+
+        Student capturedStudent = studentArgumentCaptor.getValue();
+
+        assertThat(capturedStudent).isEqualTo(student);
     }
 
     @Test
