@@ -8,6 +8,16 @@ class LehrerkalenderSpringBootApplicationTests {
 
     @Test
     void contextLoads() {
+        //given
+        //Input
+
+        //when
+        //tatsächliches Ergebnis
+
+        //then
+        //Erwartetes Ergebnis
+        //Vergleich
+
     }
 
 }
