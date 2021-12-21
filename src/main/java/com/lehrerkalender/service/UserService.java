@@ -2,6 +2,7 @@ package com.lehrerkalender.service;
 
 import com.lehrerkalender.dao.UserRepository;
 import com.lehrerkalender.entity.User;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,13 +10,18 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@NoArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public void registerUser(User user) {
         user.setPassword(encryptPassword(user.getPassword()));
