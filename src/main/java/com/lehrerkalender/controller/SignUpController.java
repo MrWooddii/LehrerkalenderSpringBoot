@@ -40,14 +40,14 @@ public class SignUpController {
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, HttpServletRequest request, HttpSession session) {
 
-        boolean uniqueUsername = userService.UsernameIsUnique(user.getUsername());
-        boolean uniqueEmail = userService.mailIsUnique(user.getEmail());
+        boolean usernameIsTaken = userService.usernameIsTaken(user.getUsername());
+        boolean emailIsTaken = userService.mailIsTaken(user.getEmail());
 
-        if(result.hasErrors() || !uniqueUsername || !uniqueEmail) {
-            if(!uniqueUsername) {
+        if(result.hasErrors() || usernameIsTaken || emailIsTaken) {
+            if(usernameIsTaken) {
                 model.addAttribute("usernameTaken", true);
             }
-            if(!uniqueEmail) {
+            if(emailIsTaken) {
                 model.addAttribute("emailTaken", true);
             }
             return "register-form";

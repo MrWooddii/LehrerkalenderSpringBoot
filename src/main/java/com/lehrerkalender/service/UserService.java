@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @NoArgsConstructor
 public class UserService {
@@ -34,14 +32,12 @@ public class UserService {
         return passwordEncoder.encode(password);
     }
 
-    public boolean mailIsUnique(String email) {
-        Optional<String> unique = userRepository.findByEmail(email);
-        return unique.isEmpty();
+    public boolean mailIsTaken(String email) {
+        return userRepository.existsByEmailIsLike(email);
     }
 
-    public boolean UsernameIsUnique(String username) {
-        Optional<User> unique = userRepository.findByUsername(username);
-        return unique.isEmpty();
+    public boolean usernameIsTaken(String username) {
+        return userRepository.existsByUsernameIsLike(username);
     }
 
 }
