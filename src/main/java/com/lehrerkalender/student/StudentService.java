@@ -1,10 +1,7 @@
-package com.lehrerkalender.service;
+package com.lehrerkalender.student;
 
-import com.lehrerkalender.dao.GradeRepository;
-import com.lehrerkalender.dao.StudentRepository;
-import com.lehrerkalender.entity.Grade;
-import com.lehrerkalender.entity.Student;
-import com.lehrerkalender.entity.User;
+import com.lehrerkalender.grade.Grade;
+import com.lehrerkalender.grade.GradeRepository;
 import com.lehrerkalender.user.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

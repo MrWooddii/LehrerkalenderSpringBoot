@@ -1,4 +1,4 @@
-package com.lehrerkalender.entity;
+package com.lehrerkalender.student;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

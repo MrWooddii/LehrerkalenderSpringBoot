@@ -1,6 +1,5 @@
-package com.lehrerkalender.dao;
+package com.lehrerkalender.grade;
 
-import com.lehrerkalender.entity.Grade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

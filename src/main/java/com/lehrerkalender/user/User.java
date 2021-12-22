@@ -1,4 +1,4 @@
-package com.lehrerkalender.entity;
+package com.lehrerkalender.user;
 
 import lombok.Getter;
 import lombok.Setter;

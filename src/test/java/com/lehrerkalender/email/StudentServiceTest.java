@@ -1,8 +1,9 @@
-package com.lehrerkalender.service;
+package com.lehrerkalender.email;
 
-import com.lehrerkalender.dao.GradeRepository;
-import com.lehrerkalender.dao.StudentRepository;
-import com.lehrerkalender.entity.Student;
+import com.lehrerkalender.grade.GradeRepository;
+import com.lehrerkalender.student.StudentRepository;
+import com.lehrerkalender.student.Student;
+import com.lehrerkalender.student.StudentService;
 import com.lehrerkalender.user.CustomUserDetails;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

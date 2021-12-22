@@ -1,5 +1,6 @@
-package com.lehrerkalender.entity;
+package com.lehrerkalender.grade;
 
+import com.lehrerkalender.student.Student;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;

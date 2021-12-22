@@ -1,7 +1,5 @@
-package com.lehrerkalender.service;
+package com.lehrerkalender.user;
 
-import com.lehrerkalender.dao.UserRepository;
-import com.lehrerkalender.entity.User;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

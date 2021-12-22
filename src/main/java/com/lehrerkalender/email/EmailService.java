@@ -1,4 +1,4 @@
-package com.lehrerkalender.service;
+package com.lehrerkalender.email;
 
 public interface EmailService {
 

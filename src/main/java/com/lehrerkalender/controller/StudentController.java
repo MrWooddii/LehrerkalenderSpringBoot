@@ -1,8 +1,8 @@
 package com.lehrerkalender.controller;
 
-import com.lehrerkalender.entity.Grade;
-import com.lehrerkalender.entity.Student;
-import com.lehrerkalender.service.StudentService;
+import com.lehrerkalender.grade.Grade;
+import com.lehrerkalender.student.Student;
+import com.lehrerkalender.student.StudentService;
 import com.lehrerkalender.user.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

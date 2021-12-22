@@ -1,6 +1,5 @@
-package com.lehrerkalender.service;
+package com.lehrerkalender.user;
 
-import com.lehrerkalender.user.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,16 +29,6 @@ public class SecurityService {
         } catch (AuthenticationException e) {
             e.printStackTrace();
         }
-
-
-        /*
-        if(usernamePasswordAuthenticationToken.isAuthenticated()) {
-            System.out.println(">>>>>>> authenticated");
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            System.out.println(">>>>>>>>Login successfull");
-        }
-        System.out.println(">>>>>> Ich bin durchgelaufen");
-    */
     }
 
 }

@@ -1,5 +1,6 @@
-package com.lehrerkalender.entity;
+package com.lehrerkalender.student;
 
+import com.lehrerkalender.grade.Grade;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

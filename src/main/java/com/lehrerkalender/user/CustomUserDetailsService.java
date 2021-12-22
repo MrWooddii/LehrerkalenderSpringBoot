@@ -1,8 +1,5 @@
-package com.lehrerkalender.service;
+package com.lehrerkalender.user;
 
-import com.lehrerkalender.dao.UserRepository;
-import com.lehrerkalender.entity.User;
-import com.lehrerkalender.user.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

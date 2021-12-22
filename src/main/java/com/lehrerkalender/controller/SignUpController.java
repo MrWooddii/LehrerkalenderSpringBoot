@@ -1,9 +1,9 @@
 package com.lehrerkalender.controller;
 
-import com.lehrerkalender.entity.User;
-import com.lehrerkalender.service.EmailService;
-import com.lehrerkalender.service.SecurityService;
-import com.lehrerkalender.service.UserService;
+import com.lehrerkalender.user.User;
+import com.lehrerkalender.email.EmailService;
+import com.lehrerkalender.user.SecurityService;
+import com.lehrerkalender.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

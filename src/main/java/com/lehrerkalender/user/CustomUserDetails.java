@@ -1,7 +1,5 @@
 package com.lehrerkalender.user;
 
-import com.lehrerkalender.entity.User;
-
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;

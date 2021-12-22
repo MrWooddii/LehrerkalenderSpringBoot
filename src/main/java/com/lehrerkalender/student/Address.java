@@ -1,4 +1,4 @@
-package com.lehrerkalender.entity;
+package com.lehrerkalender.student;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.ToString;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 @Entity
 @Lazy
