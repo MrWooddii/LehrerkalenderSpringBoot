@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns:th = "https://www.thymeleaf.org" xmlns:sec = "https//www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Motivation</title>
+    <meta charset="utf-8"/>
+
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/navbar.css}"/>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a th:href = "@{/user/home}">Home</a>
+        </li>
+
+        <!-- TODO: Module einbauen -->
+        <li>
+            <a th:href = "@{/user/home}">Module</a>
+        </li>
+
+        <li class = "topnav-right">
+            <a th:href = "@{/logout}">Logout</a>
+        </li>
+
+    </ul>
+
+    <p th:if = "${catPhoto != null}">
+        <img th:src = "${catPhoto}" alt = "Ein zufälliges Katzenfoto">
+    </p>
+
+</body>
+
+</html>
