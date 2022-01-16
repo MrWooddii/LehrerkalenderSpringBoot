@@ -4,7 +4,7 @@ html, body{
     font-family:Verdana, Arial, Helvetica, sans-serif;
 }
 
-ul {
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -12,11 +12,11 @@ ul {
     background-color: #31708f;
 }
 
-li {
+nav li {
    float: left;
 }
 
-li a{
+nav li a{
     display: block;
     color: white;
     text-align: center;
@@ -24,7 +24,7 @@ li a{
     text-decoration: none;
 }
 
-li a:hover {
+nav li a:hover {
     color: white;
     background-color: #124177;
 }

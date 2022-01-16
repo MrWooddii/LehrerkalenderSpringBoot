@@ -1,6 +1,7 @@
 package com.lehrerkalender.controller;
 
 import com.lehrerkalender.extAPI.CatPhotoAPIService;
+import com.lehrerkalender.extAPI.JokesAPIService;
 import lombok.Getter;
 import lombok.Setter;
 import org.json.simple.JSONObject;
@@ -19,9 +20,12 @@ public class MotivationController {
     @Autowired
     private CatPhotoAPIService catService;
 
+    @Autowired
+    JokesAPIService jokeService;
+
     @GetMapping("/categories")
     public String showMotivationPage() {
-        return "motivation";
+        return "motivation-module";
     }
 
     @GetMapping("/cat")
@@ -31,7 +35,18 @@ public class MotivationController {
         if(catPhoto != null) {
             model.addAttribute("catPhoto", catPhoto.get("webpurl"));
         }
+        return "motivation-module";
+    }
 
-        return "motivation";
+    @GetMapping("/jokes")
+    public String getJokes(Model model) {
+        //erhält einen zufälligen Witz von einer externen API
+        JSONObject joke = jokeService.getJoke();
+
+        if(joke != null) {
+            model.addAttribute("joke", joke.get("joke"));
+        }
+
+        return "motivation-module";
     }
 }
