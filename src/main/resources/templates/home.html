@@ -14,21 +14,12 @@
 
 <body>
 
-<ul>
-    <li>
-        <a th:href = "@{/user/home}">Home</a>
-    </li>
+<!--Navigation bar-->
+<!-- th:insert="FileName :: FragmentName -->
+<div th:insert="navbar :: navbar"></div>
 
-    <!-- TODO: Module einbauen -->
-    <li>
-        <a th:href = "@{/user/home}">Module</a>
-    </li>
+</div>
 
-    <li class = "topnav-right">
-        <a th:href = "@{/logout}">Logout</a>
-    </li>
-
-</ul>
 
 <div id = "container">
 

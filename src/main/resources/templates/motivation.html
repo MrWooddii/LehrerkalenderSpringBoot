@@ -10,21 +10,10 @@
 </head>
 
 <body>
-    <ul>
-        <li>
-            <a th:href = "@{/user/home}">Home</a>
-        </li>
-
-        <!-- TODO: Module einbauen -->
-        <li>
-            <a th:href = "@{/user/home}">Module</a>
-        </li>
-
-        <li class = "topnav-right">
-            <a th:href = "@{/logout}">Logout</a>
-        </li>
-
-    </ul>
+<!-- Navigation bar -->
+<!-- th:insert="FileName :: FragmentName -->
+<div th:insert="navbar :: navbar"></div>
+<!-- Navigation bar Ende -->
 
     <p th:if = "${catPhoto != null}">
         <img th:src = "${catPhoto}" alt = "Ein zufälliges Katzenfoto">

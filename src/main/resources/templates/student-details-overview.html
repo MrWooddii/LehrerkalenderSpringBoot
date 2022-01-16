@@ -2,12 +2,18 @@
 
 <head>
     <link rel = "stylesheet" type = "text/css" th:href = "@{/css/classOverviewStyle.css}"  />
+    <link rel = "stylesheet" type = "text/css" th:href = "@{/css/navbar.css}"/>
 
     <title>Weitere Informationen</title>
 
 </head>
 
 <body>
+
+<!-- Navigation bar -->
+<!-- th:insert="FileName :: FragmentName -->
+<div th:insert="navbar :: navbar"></div>
+<!-- Navigation bar Ende -->
 
 <p th:text = "'Weitere Informationen zu ' + ${student.firstName} + ' ' + ${student.lastName}"></p>
 

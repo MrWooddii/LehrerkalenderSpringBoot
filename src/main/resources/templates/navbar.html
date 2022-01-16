@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>NavigationBar</title>
+
+</head>
+
+    <body>
+
+    <nav th:fragment="navbar">
+
+        <ul>
+            <li>
+                <a th:href = "@{/user/home}">Home</a>
+            </li>
+
+            <!-- TODO: Module einbauen -->
+            <li>
+                <a th:href = "@{/user/home}">Module</a>
+            </li>
+
+            <li class = "topnav-right">
+                <a th:href = "@{/logout}">Logout</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    </body>
+</html>
