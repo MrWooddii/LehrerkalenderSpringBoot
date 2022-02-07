@@ -44,7 +44,6 @@ public class StudentController {
 
         List<Student> students = studentService.getStudentsByName(searchName, user.getId());
 
-        //TODO: Fehlermeldung ausgeben
         if (students.isEmpty()) {
             System.out.println("students is empty");
             return redirectToClassOverviewLink;

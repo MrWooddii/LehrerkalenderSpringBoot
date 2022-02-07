@@ -12,14 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    //Spring sec doc: https://docs.spring.io/spring-security/reference/servlet/index.html
-    //Anleitung Security: https://labs.micromata.de/category/best-practices/tutorial-spring-security/
 
     //UserDetailsService wird genutzt, um username, password und GrantedAuthorities für User zu erhalten
     @Autowired
@@ -42,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/students/**").hasRole("USER")
                 .antMatchers("/user/register").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/motivation/**").hasRole("USER")
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/register").permitAll()
                 .and()
@@ -60,14 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder getPasswordEncoder() {
-        //return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder();
     }
 
     //muss definiert sein, damit kein Fehler beim kompilieren geworfen wird
     @Bean
     public PasswordEncoder passwordEncoder() {
-        //return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder();
     }
 }

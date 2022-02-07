@@ -40,7 +40,6 @@ public class StudentService {
     }
 
     //sucht nach den SuS nach dem eingegebenen Namen in der Suchfunktion
-    //TODO: Tabelle dynamisch mit JS filtern lassen
     public List<Student> getStudentsByName(String name, Long userId) {
         List<Student> students = studentRepository.findStudentsByNameAndUserId(name, userId);
         return students;

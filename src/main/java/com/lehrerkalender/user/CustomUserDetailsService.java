@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-// https://stackoverflow.com/questions/41770156/spring-add-custom-user-details-to-spring-security-user/41772510
-// https://www.youtube.com/watch?v=TNt3GHuayXs
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

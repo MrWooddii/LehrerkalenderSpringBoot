@@ -13,8 +13,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/landing-page").setViewName("landing-page");
         registry.addViewController("/login").setViewName("login");
-
-        //https://spring.io/guides/gs/securing-web/
     }
 
     /* wenn EnableWebMvc benötigt wird:
