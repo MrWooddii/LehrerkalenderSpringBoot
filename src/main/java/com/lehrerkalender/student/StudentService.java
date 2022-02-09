@@ -34,15 +34,12 @@ public class StudentService {
             return new Student();
         }
 
-        Student student = studentOptional.get();
-
-        return student;
+        return studentOptional.get();
     }
 
     //sucht nach den SuS nach dem eingegebenen Namen in der Suchfunktion
     public List<Student> getStudentsByName(String name, Long userId) {
-        List<Student> students = studentRepository.findStudentsByNameAndUserId(name, userId);
-        return students;
+        return studentRepository.findStudentsByNameAndUserId(name, userId);
     }
 
     public void saveOrUpdateStudent(@AuthenticationPrincipal CustomUserDetails user, Student student) {
@@ -72,8 +69,6 @@ public class StudentService {
             return new Grade();
         }
 
-        Grade grade = gradeOptional.get();
-
-        return grade;
+        return gradeOptional.get();
     }
 }

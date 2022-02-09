@@ -13,11 +13,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityService {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    public SecurityService(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+    }
 
     public void autoLogin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);

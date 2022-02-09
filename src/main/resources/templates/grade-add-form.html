@@ -21,7 +21,6 @@
 <div id = "container">
     <h3 th:text = "'Note für ' + ${student.firstName} + ' ' + ${student.lastName} + ' hinzufügen'"></h3>
 
-    <!-- Send to Spring MVC mapping - modelAttribute = "student" entspricht im Controller dem angegebenen Namen in der "model.addAttribute"-Methode -->
     <form th:action = "@{/students/saveGrade}" th:object = "${grade}" method = "POST" th:modelAttribute = "grade">
 
         <input type = "hidden" th:field = "*{id}"/>

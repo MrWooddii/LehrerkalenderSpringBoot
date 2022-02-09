@@ -17,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/motivation")
 public class MotivationController {
 
-    @Autowired
     private CatPhotoAPIService catService;
 
+    private JokesAPIService jokeService;
+
     @Autowired
-    JokesAPIService jokeService;
+    public MotivationController(CatPhotoAPIService catService, JokesAPIService jokeService) {
+        this.catService = catService;
+        this.jokeService = jokeService;
+    }
 
     @GetMapping("/categories")
     public String showMotivationPage() {

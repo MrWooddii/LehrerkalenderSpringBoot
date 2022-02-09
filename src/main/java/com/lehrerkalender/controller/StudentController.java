@@ -88,7 +88,6 @@ public class StudentController {
     public String deleteStudent(@RequestParam("studentId") Long id) {
 
         if(id == null) {
-            System.out.println("testi");
             return redirectToClassOverviewLink;
         }
         studentService.deleteStudent(id);
@@ -143,7 +142,6 @@ public class StudentController {
         List<Grade> grades = studentService.getGradesByStudent(student.getId());
         model.addAttribute("grades", grades);
         return "student-performance";
-        //return redirectToClassOverviewLink;
     }
 
     @GetMapping("/updateGrade")

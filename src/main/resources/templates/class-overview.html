@@ -82,20 +82,6 @@
                             <a th:href = "@{/students/deleteStudent(studentId = ${tempStudent.id})}" class = "btn btn-danger" role = "button" onclick = "if(!(confirm('Möchtest du diesen Schüler / diese Schülerin wirklich löschen?'))) return false">
                                 Löschen
                             </a>
-
-                            <!--
-                            <form method = "POST" th:action = "@{/students/showFormForUpdate}">
-                                <input type = "hidden" name = "studentId" th:value = "${tempStudent.getId()}"/>
-                                <button type = "submit" name = "submit" value = "value">Update</button>
-                            </form> -->
-
-                            <!-- https://stackoverflow.com/questions/38546100/can-i-make-http-post-request-from-thymeleaf-table-in-spring-boot-application -->
-
-                            <!--
-                            <form method = "POST" th:action = "@{/students/deleteStudent}" onclick = "if(!(confirm('Möchtest du diesen Schüler / diese Schülerin wirklich löschen?'))) return false">
-                                <input type = "hidden" name = "studentId" th:value = "${tempStudent.getId()}"/>
-                                <button type = "submit" name = "submit" value = "value">Löschen</button>
-                            </form> -->
                         </td>
                     </tr>
 

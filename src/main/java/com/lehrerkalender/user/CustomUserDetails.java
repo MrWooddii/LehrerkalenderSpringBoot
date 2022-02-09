@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 @Setter
 public class CustomUserDetails extends User implements UserDetails {
 
-    //https://www.youtube.com/watch?v=TNt3GHuayXs
-
     private User user;
     private Long id;
     private List<GrantedAuthority> authorities;

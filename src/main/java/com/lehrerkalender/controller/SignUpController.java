@@ -21,14 +21,18 @@ import javax.validation.Valid;
 @RequestMapping("/account")
 public class SignUpController {
 
-    @Autowired
     private UserService userService;
 
-    @Autowired
     private SecurityService securityService;
 
-    @Autowired
     private EmailService emailService;
+
+    @Autowired
+    public SignUpController(UserService userService, SecurityService securityService, EmailService emailService) {
+        this.userService = userService;
+        this.securityService = securityService;
+        this.emailService = emailService;
+    }
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
