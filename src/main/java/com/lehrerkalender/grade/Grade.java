@@ -24,31 +24,31 @@ public class Grade {
     @NotNull(message = "Bitte wähle ein Datum aus.")
     @PastOrPresent(message = "Das Datum darf nicht in der Zukunft liegen.")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    LocalDate date;
+    private LocalDate date;
 
     @Column(name = "subject")
     @NotBlank(message = "Bitte wähle ein Thema aus.")
-    String subject;
+    private String subject;
 
     @Column(name = "performance")
     @NotBlank(message = "Bitte gib eine Note ein.")
     @Range(min = 1, max = 6, message = "Bitte gib eine Note zwischen 1 und 6 ein.")
-    String performance;
+    private String performance;
 
     @Column(name = "written")
     @NotNull(message = "Bitte wähle die Schriftform aus.")
-    boolean written;
+    private boolean written;
 
     @Column(name = "notes")
-    String notes;
+    private String notes;
 
     @Column(name = "titel")
     @NotBlank(message = "Bitte gib den Titel des Tests ein.")
-    String titel;
+    private String titel;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
-    Student student;
+    private Student student;
 
     public Grade(LocalDate date, String subject, String performance, boolean written, String notes, String titel) {
         this.date = date;
